@@ -1,0 +1,35 @@
+body {   
+    font-family: sans-serif; 
+    text-align: center;
+    background: lightgray;
+    color:black
+}
+
+#datospokemon{
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+.pokemon{
+    background: linear-gradient(to bottom, red 0%, red 50%, white 50%, white 100%);;
+    border-radius: 10px;
+    width:300px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    transition: transform 0.2s;
+}
+
+.picture{
+    width:220px;
+    height:auto;
+}
+
+.specificInfo{
+    position:relative;
+    top:6px
+}
+
+
