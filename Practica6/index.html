@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema Admin</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+    /* Un pequeño truco para que el menú ocupe toda la altura */
+        .altura-total { height: 100vh; }
+    </style>
+</head>
+<body>
+    <!-- AQUÍ ESCRIBIREMOS TODO EL CÓDIGO -->
+    <div class="container-fluid">
+        <div class="row">
+    <!-- COLUMNA 1: MENÚ LATERAL (2 columnas de ancho) -->
+            <div class="col-md-2 bg-dark text-white altura-total p-3">
+                <h4> Mi Sistema</h4>
+                <hr>
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link text-white active" href="#"> Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white-50" href="#"> Usuarios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white-50" href="#"> Configuración</a>
+                    </li>
+                </ul>
+            </div>
+    <!-- COLUMNA 2: CONTENIDO (10 columnas de ancho) -->
+            <div class="col-md-10 bg-light p-4">
+                <h2>Resumen del Mes</h2>
+                <!-- Abrimos una nueva fila DENTRO de la columna principal -->
+                <div class="row mt-4">
+                <!-- Tarjeta 1 -->
+                <div class="col-md-4">
+                    <div class="card text-white bg-primary mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Usuarios Totales</h5>
+                            <p class="card-text fs-2">1,250</p>
+                            
+                        </div>
+                    </div>
+                </div>
+                <!-- Tarjeta 2 -->
+                <div class="col-md-4">
+                    <div class="card text-white bg-success mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Ventas</h5>
+                            
+                            <p class="card-text fs-2">$45,000</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Tarjeta 3 -->
+                <div class="col-md-4">
+                    <div class="card text-white bg-danger mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Errores</h5>
+                            <p class="card-text fs-2">3</p>
+                        </div>
+                    </div>
+                </div>
+                <h3 class="mt-5">Lista de Usuarios Recientes</h3>
+                <!-- Botón que abre el modal -->
+                <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#modalUsuario">
+                    Nuevo Usuario
+                </button>
+                <table class="table table-striped table-hover shadow-sm">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>#</th>
+                            <th>Nombre</th>
+                            <th>Correo</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaUsuarios">
+                        <tr>
+                            <td>1</td>
+                            <td>Juan Pérez</td>
+                            <td>juan@gmail.com</td>
+                            <td><span class="badge bg-success">Activo</span></td>
+                            <td>
+                                <button class="btn btn-sm btn-primary">Editar</button>
+                                <button class="btn btn-sm btn-danger">Borrar</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Ana Gómez</td>
+                            <td>ana@hotmail.com</td>
+                            <td><span class="badge bg-warning text-dark">Pendiente</span></td>
+                            <td>
+                                <button class="btn btn-sm btn-primary">Editar</button>
+                                <button class="btn btn-sm btn-danger">Borrar</button>
+                            </td>
+                        </tbody>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    </div>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Modal (Ventana Emergente) -->
+    <div class="modal fade" id="modalUsuario" tabindex="-1" aria-hidden="true">
+        <div class="modal-content">
+            <div class="modal-dialog">
+                <div class="modal-header">
+                    <h5 class="modal-title">Registrar Nuevo Usuario</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label class="form-label">Nombre Completo</label>
+                            <input type="text" class="form-control" id="nombreUser" name="nombreUser" placeholder="Ej: Pepito Perez">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Correo Electrónico</label>
+                            <input type="email" class="form-control" id="correoUser" name="correoUser" placeholder="nombre@correo.com">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="guardarUsuario()">Guardar</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function guardarUsuario() {
+            // 1. CAPTURAR DATOS
+            // "Oye JS, ve al elemento 'nombreUser' y tráeme su valor"
+            let nombre = document.getElementById('nombreUser').value;
+            let correo = document.getElementById('correoUser').value;
+            // 2. VALIDACIÓN BÁSICA
+            // Si alguno está vacío, muestra alerta y detente (return)
+            if (nombre === "" || correo === "") {
+                alert("Por favor, llena todos los datos ");
+                return;
+            }
+            // 3. CREAR LA FILA HTML
+            // Usamos comillas invertidas (backticks ` `) para mezclar texto y variables ${}
+            let nuevaFila = `
+                <tr>
+                    <td>3</td>
+                    <td>${nombre}</td>
+                    <td>${correo}</td>
+                    <td><span class="badge bg-info text-dark">Nuevo</span></td>
+                    <td>
+                    <button class="btn btn-sm btn-primary">Editar</button>
+                    <button class="btn btn-sm btn-danger">Borrar</button>
+                    </td>
+                </tr>
+            `;
+            // 4. INYECTAR EN LA TABLA
+            // "Al HTML que ya tiene la tabla, agrégale (+=) esta nueva fila"
+            document.getElementById('tablaUsuarios').innerHTML += nuevaFila;
+            // 5. LIMPIAR EL FORMULARIO
+            // Borramos lo que escribió el usuario para que quede limpio
+            document.getElementById('nombreUser').value = "";
+            document.getElementById('correoUser').value = "";
+        }
+    </script>
+</body>
+</html>
