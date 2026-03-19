@@ -13,12 +13,5 @@
         <p>Desarrollado con Python, Flask y Bootstrap.</p>
         <a href="/" class="btn btn-primary">Regresar al Dashboard</a>
     </div>
-    <script>
-        fetch('/sidebar')
-            .then(res => res.text())
-            .then(data => {
-            document.getElementById('sidebar-desktop').innerHTML = data;
-        });
-    </script>
 </body>
 </html>
